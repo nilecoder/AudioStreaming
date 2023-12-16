@@ -120,7 +120,12 @@ final class AudioPlayerService {
     private func configureAudioSession() {
         do {
             print("AudioSession category is AVAudioSessionCategoryPlayback")
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, policy: .longFormAudio, options: [])
+            try AVAudioSession.sharedInstance().setCategory(
+                .playback,
+                mode: .default,
+                policy: .longFormAudio,
+                options: [.allowBluetooth, .allowBluetoothA2DP, .mixWithOthers, .duckOthers]
+            )
             try AVAudioSession.sharedInstance().setPreferredIOBufferDuration(0.1)
         } catch let error as NSError {
             print("Couldn't setup audio session category to Playback \(error.localizedDescription)")
